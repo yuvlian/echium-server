@@ -2,8 +2,6 @@
 
 Honkai: Star Rail private server (4.5.52)
 
-Incase I haven't updated this project in a while, you can try updating it yourself with https://github.com/yuvlian/hsr-proto
-
 ## General Showcase
 
 <details>
