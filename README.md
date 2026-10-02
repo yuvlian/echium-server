@@ -1,6 +1,6 @@
 # echium-server
 
-Honkai: Star Rail private server (4.5.52)
+Honkai: Star Rail private server (4.6.51)
 
 ## General Showcase
 
