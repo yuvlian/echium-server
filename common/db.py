@@ -112,6 +112,11 @@ class DB(BaseModel):
         default_factory=SpecialBlessing,
         validation_alias=AliasChoices("special_blessing", "global_buff"),
     )
+    # avatarId (1204/1213/1308...) -> enabled (missing key = enabled)
+    ex_eidolons: dict[int, bool] = Field(default_factory=dict)
+
+    def is_ex_eidolon_enabled(self, avatar_id: int) -> bool:
+        return self.ex_eidolons.get(avatar_id, True)
 
     @staticmethod
     def default() -> DB:

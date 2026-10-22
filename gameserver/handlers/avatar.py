@@ -1,4 +1,5 @@
 from common.db import MultiPath
+from common.res import EX_EIDOLON_CONFIGS
 from common.util import FreesrUtils
 from proto import (
     Avatar,
@@ -13,6 +14,13 @@ from proto import (
 from ..connection import Connection
 from ..handler import handler
 from ..packet import Packet
+
+
+def avatar_ex_rank_list(c: Connection, avatar_id: int) -> list[int]:
+    base_id = MultiPath.get_base_id(avatar_id)
+    if not c.db.is_ex_eidolon_enabled(base_id):
+        return []
+    return [cfg.id for cfg in EX_EIDOLON_CONFIGS.get(base_id, [])]
 
 
 def build_avatar_sync(c: Connection, equipped: bool = True) -> AvatarSync:
@@ -74,6 +82,7 @@ def build_avatar_sync(c: Connection, equipped: bool = True) -> AvatarSync:
             unk_enhanced_id=av.enhanced_id or 0,
             unlock_timestamp=1712924677,
             dressed_skin_id=0,
+            ex_rank_list=avatar_ex_rank_list(c, av.avatar_id),
         )
         for av in c.freesr_data.avatars.values()
     ]

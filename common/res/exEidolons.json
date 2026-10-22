@@ -1,0 +1,25 @@
+{
+  "exEidolons": {
+    "1204": [
+      {
+        "id": 1,
+        "statusId": 10012045,
+        "name": "JingYuan"
+      }
+    ],
+    "1213": [
+      {
+        "id": 1,
+        "statusId": 10012136,
+        "name": "DanHengIL"
+      }
+    ],
+    "1308": [
+      {
+        "id": 1,
+        "statusId": 10013087,
+        "name": "Acheron"
+      }
+    ]
+  }
+}

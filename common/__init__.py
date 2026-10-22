@@ -2,10 +2,10 @@ SDKSERVER_ADDR = ("127.0.0.1", 21000)
 GAMESERVER_ADDR = ("127.0.0.1", 23301)
 
 # put your hotfix urls here (if needed)
-# these hotfixes are currently for 4.6.51
-ASSET_BUNDLE_URL = "https://autopatchcn.bhsr.com/asb/BetaLive/output_16677734_6b334c11ab3a_653e489328e98e"
-EX_RESOURCE_URL = "https://autopatchcn.bhsr.com/design_data/BetaLive/output_16706787_90982cd003eb_5ed57e0de4e2b4"
-LUA_URL = "https://autopatchcn.bhsr.com/lua/BetaLive/output_16679499_5abbd35a74c5_a28e83e88b78d5"
+# these hotfixes are currently for 4.6.53
+ASSET_BUNDLE_URL = "https://autopatchcn.bhsr.com/asb/BetaLive/output_16818953_d4345bbd54a2_93c4aa5dfb978d"
+EX_RESOURCE_URL = "https://autopatchcn.bhsr.com/design_data/BetaLive/output_16833202_959c316ef547_ac20bef3513343"
+LUA_URL = "https://autopatchcn.bhsr.com/lua/BetaLive/output_16819203_679727d45bd7_91ccc9b73f52b7"
 IFIX_URL = (
     "https://autopatchcn.bhsr.com/ifix/BetaLive/output_0_40d2ce0253_c61ba99f70b885"
 )

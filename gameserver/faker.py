@@ -59,6 +59,10 @@ class FakeConnection:
                 vore_override=False,
                 vore_level=0,
             ),
+            ex_eidolons={},
+        )
+        self.db.is_ex_eidolon_enabled = lambda avatar_id: self.db.ex_eidolons.get(
+            avatar_id, True
         )
         self.freesr_data = SimpleNamespace(
             lightcones=[],

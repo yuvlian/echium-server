@@ -3,6 +3,7 @@ import time
 from collections import OrderedDict
 
 from common.db import MultiPath
+from common.res import EX_EIDOLON_CONFIGS, EX_EIDOLON_NAMES
 from common.util import AsyncFs, FreesrUtils, Log
 from proto import (
     AvatarPathChangedNotify,
@@ -227,6 +228,45 @@ def parse_vore_level(s: str) -> int | None:
     return level if 0 <= level <= 3 else None
 
 
+def parse_ex_eidolon(args: list[str]) -> tuple[int, bool] | None:
+    if not args:
+        return None
+    token = args[0].strip().lower()
+    on = parse_bool(args[1:], True)
+    if on is None:
+        return None
+
+    avatar_id: int | None = None
+    if token.isdigit():
+        avatar_id = int(token)
+    else:
+        for aid in EX_EIDOLON_CONFIGS:
+            if EX_EIDOLON_NAMES.get(aid, "").lower() == token:
+                avatar_id = aid
+                break
+    if avatar_id is None or avatar_id not in EX_EIDOLON_CONFIGS:
+        return None
+    return avatar_id, on
+
+
+def ex_command(c: Connection, args: list[str]) -> str | None:
+    parsed = parse_ex_eidolon(args)
+    if parsed is None:
+        return f"usage: ex <id/name> <on/off>"
+    avatar_id, on = parsed
+
+    changed = False
+    cur = c.db.ex_eidolons.get(avatar_id, True)
+    if cur != on:
+        c.db.ex_eidolons[avatar_id] = on
+        changed = True
+    if changed:
+        asyncio.create_task(c.save_db())
+        asyncio.create_task(sync_player(c))
+    name = EX_EIDOLON_NAMES.get(avatar_id, avatar_id)
+    return f"ex {name} {'on' if on else 'off'}"
+
+
 async def sync_player(c: Connection) -> None:
     await c.send_packet(
         PlayerSyncScNotify(
@@ -360,6 +400,8 @@ async def on_set_signature(c: Connection, pkt: Packet) -> None:
                         feedback = f"vore {'on' if on else 'off'}"
                     case _:
                         feedback = "sb needs cast/sw/vore/vorelvl"
+    elif command == "ex":
+        feedback = ex_command(c, args)
     elif command == "cl":
         feedback = lineup_command(c, args)
     elif command == "sync":

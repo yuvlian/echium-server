@@ -1,6 +1,6 @@
 # echium-server
 
-Honkai: Star Rail private server (4.6.51)
+Honkai: Star Rail private server (4.6.53)
 
 ## General Showcase
 
@@ -39,6 +39,7 @@ Honkai: Star Rail private server (4.6.51)
     | `sb` | `sw <on/off>` | Toggle Silver Wolf global buff | `sb sw off` |
     | `sb` | `vore <on/off>` | Toggle whether server should override voracity blessing from srtools json | `sb vore on` |
     | `sb` | `vorelvl <0-3>` | Set voracity blessing level | `sb vorelvl 2` |
+    | `ex` | `<id/name> [on/off]` | Toggle ExRank (Ex-Eidolon) for an avatar; enabled by default | `ex acheron off` |
     | `cl` | `add <id1> <id2>...` | Add characters to custom battle lineup | `cl add 1001 1001` |
     | `cl` | `clear` | Reset custom battle lineup | `cl clear` |
     | `sync` | - | Sync relics, lightcones, and inventory from `freesr-data.json` | `sync` |

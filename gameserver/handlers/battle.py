@@ -1,6 +1,7 @@
 from random import randint
 
-from common.res import AVATAR_CONFIGS
+from common.db import MultiPath
+from common.res import AVATAR_CONFIGS, EX_EIDOLON_CONFIGS
 from common.srtools import BattleType
 from common.util import FreesrUtils
 from proto import (
@@ -85,6 +86,12 @@ async def create_battle_info(
             battle_av, techs = FreesrUtils.avatar_to_battle_avatar_proto(
                 av, aidx, lightcone_by_avatar.get(aid), relics_by_avatar.get(aid, [])
             )
+            base_id = MultiPath.get_base_id(aid)
+            battle_av.ex_rank_list = [
+                cfg.id
+                for cfg in EX_EIDOLON_CONFIGS.get(base_id, [])
+                if db.is_ex_eidolon_enabled(base_id)
+            ]
 
             battle_info.buff_list.extend(techs)
 
